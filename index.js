@@ -6,11 +6,12 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const allowedOrigins = ['*'];
 
-aapp.use(cors({
-  origin: '*', // or specify specific origins if needed
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors({
+    origin: '*', // or specify specific origins if needed
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials:true
+  }));
 app.use(bodyParser.json());
 
 app.use(cookieParser());    
