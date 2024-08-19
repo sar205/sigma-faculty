@@ -4,11 +4,20 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const app = express();
+const allowedOrigins = ['http://localhost:5173', '*'];
+
 app.use(cors({
     origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        return callback(null, origin);
+        if (!origin) {
+            // Allow requests with no origin (e.g., mobile apps or curl)
+            return callback(null, true);
+        }
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            // Allow requests from specified origins
+            return callback(null, origin);
+        }
+        // Reject requests from other origins
+        return callback(new Error('Not allowed by CORS'), false);
     },
     credentials: true,
 }));
