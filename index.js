@@ -7,16 +7,13 @@ const app = express();
 const allowedOrigins = ['*'];
 
 app.use(cors({
-    origin: function(origin, callback) {
-      // Allow requests from specific origins or from no origin (for mobile apps, testing tools, etc.)
-      if (!origin || origin.startsWith('http://localhost:5173')) {
-        return callback(null, true);
-      }
-      return callback(new Error('Not allowed by CORS'));
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        return callback(null, origin);
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-subject-code'], // Add 'x-subject-code' here
-    credentials: true
+    credentials: true,
+}));dentials: true
   }))
 
 app.use(bodyParser.json());
