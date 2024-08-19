@@ -171,14 +171,14 @@ exports.deletePlanner = async (req, res) => {
 exports.getAllPlanners = async (req, res) => {
     try {
         const token = req.cookies.token;
-        const subjectCode = req.cookies.subjectCode;
+        const subjectCode = req.headers['x-subject-code']; // Extract subjectCode from headers
 
         // Check if both token and subjectCode are provided
         if (!token || !subjectCode) {
             return res.status(401).json({ message: 'Unauthorized: No token or subjectCode provided' });
         }
 
-        // Find planners using both token and subjectCode
+        // Find planners using token and subjectCode
         const planners = await Planner.find({ token, subjectCode });
 
         if (planners.length === 0) {
@@ -190,11 +190,6 @@ exports.getAllPlanners = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch planners' });
     }
 };
-
-
-
-
-
 
 
 
