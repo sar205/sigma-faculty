@@ -4,18 +4,15 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const app = express();
-
 app.use(cors({
-    origin: function (origin, callback) {
-        
-        if (!origin) return callback(null, true);
-        return callback(null, origin);
-    },
+    origin:"http://localhost:5173",
     credentials: true,
 }));
-
 app.use(bodyParser.json());
-app.use(cookieParser());
+
+app.use(cookieParser());    
+                                                              ///MongoDb all files here
+
 //All Adminn Mongos
 
 require('./MongoDb/config');
