@@ -8,16 +8,16 @@ const allowedOrigins = ['*'];
 
 app.use(cors({
     origin: function(origin, callback) {
-      // Allow requests with no origin (mobile apps, postman, etc.)
+      // Allow requests from specific origins or from no origin (for mobile apps, testing tools, etc.)
       if (!origin || origin.startsWith('http://localhost:5173')) {
         return callback(null, true);
       }
       return callback(new Error('Not allowed by CORS'));
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-subject-code'], // Add 'x-subject-code' here
     credentials: true
-  }));
+  }))
 
 app.use(bodyParser.json());
 
