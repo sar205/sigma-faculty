@@ -13,8 +13,7 @@ app.use(cors({
         return callback(null, origin);
     },
     credentials: true,
-}));dentials: true
-  }))
+}));
 
 app.use(bodyParser.json());
 
